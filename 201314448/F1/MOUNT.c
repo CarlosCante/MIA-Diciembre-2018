@@ -56,6 +56,7 @@ void EjecutarMOUNT(char pPath[], char pName[])
             nuevo->ID[1] = 'd';
             nuevo->ID[2] = Letra[NumLetra];
             nuevo->ID[3] = NumeroParticion + '0';
+            nuevo->ajuste = MBRtmp->Particiones[CooPart].Ajuste;
             strcpy(nuevo->Nombre, pName);
             strcpy(nuevo->Path, pPath);
 

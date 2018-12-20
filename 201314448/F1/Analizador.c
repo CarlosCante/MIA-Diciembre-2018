@@ -277,10 +277,6 @@ int EjecutarComando(char Comando[])
         {
             EjecutarArchivo(pPath);
         }
-        else if(strcmp(Funsion,"MKFS") == 0)
-        {
-            EjecutarMKFS(pId, pType);
-        }
         else if(strcmp(Funsion,"MKDISK") == 0)
         {
             /*
@@ -357,6 +353,10 @@ int EjecutarComando(char Comando[])
             */
             EjecutarREP(pName, pPath, pId);
         }
+        else if(strcmp(Funsion,"MKFS") == 0)/*************************************Comandos de segunda fase proyecto*******************************************/
+        {
+            EjecutarMKFS(pId, pType);
+        }
         else if(strcmp(Funsion, "LOGIN") == 0)
         {
             if(pUSR[0] != '\0' && pPWD[0] != '\0' && pId[0] != '\0')
@@ -367,6 +367,10 @@ int EjecutarComando(char Comando[])
             {
                 printf("Falta algun parametro de los requeridos para hacer login: USR, PWD, ID\n\n");
             }
+        }
+        else if(strcmp(Funsion, "MKGRP") == 0)
+        {
+            EjecutarMKGRP(pName);
         }
         else if(strcmp(Funsion,"SALIR") == 0)
         {

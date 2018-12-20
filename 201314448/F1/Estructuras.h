@@ -25,6 +25,7 @@ struct UsuarioLogeado
     char Grupo[10];
     char PathDisco[500];
     int InicioParticion;
+    char ajuste;
 };
 
 struct BloqueApuntadores
@@ -99,6 +100,7 @@ struct NodoParticion
     char Path[100];
     char Nombre[16];
     char ID[5];
+    char ajuste;
     int inicio;
     NodoParticion *siguiente;
     NodoParticion *anterior;

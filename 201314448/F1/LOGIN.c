@@ -34,8 +34,7 @@ void EjecutarLogin(char Usuario[], char Pass[], char pID[])
 
         if(DISCO != NULL)
         {
-            VerificarUsuario(DISCO, aux->inicio, Usuario, Pass, PathDisco);
-
+            VerificarUsuario(DISCO, aux->inicio, Usuario, Pass, PathDisco, aux->ajuste);
             fclose(DISCO);
         }
         else
@@ -49,7 +48,7 @@ void EjecutarLogin(char Usuario[], char Pass[], char pID[])
     }
 }
 
-void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass[], char Path[])
+void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass[], char Path[], char ajuste)
 {
     extern UsuarioLogeado *UsuarioActual;
     char Contenido[280320] = "\0";
@@ -90,31 +89,30 @@ void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass
     char NombreU[10] = "\0";
     char PassU[10] = "\0";
 
-    char Lineas[100][20];
+    typedef struct Linea
+    {
+        char Conten[20];
+    }Linea;
 
+    Linea Lineas[100];
 
 
     int encontrado = 0;
     int incorrecto = 0;
     /**Leemos cada linea del archivo users.txt**/
 
-
-    strcpy(Lineas[0],"\0");
-
-    Elemento = strtok(NULL, "\n");
-
-    int i = 1;
+    int j = 0;
 
     while(Elemento != NULL)
     {
-        strcpy(Lineas[i],Elemento);
+        strcpy(Lineas[j].Conten,Elemento);
         Elemento = strtok(NULL, "\n");
-        i++;
+        j++;
     }
 
-    for(i = 1 ; i < 100 ;i++)
+    for(int i = 0 ; i < j ;i++)
     {
-        Elemento = strtok(Lineas[i],",");
+        Elemento = strtok(Lineas[i].Conten,",");
         while(Elemento != NULL)
         {
             ID = atoi(Elemento);
@@ -140,6 +138,7 @@ void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass
                         strcpy(UsuarioActual->Pass, PassU);
                         strcpy(UsuarioActual->PathDisco,Path);
                         UsuarioActual->InicioParticion = InicioParticion;
+                        UsuarioActual->ajuste = ajuste;
                         printf("Se logeo correctamente con el usuario \"%s\".\n\n",Usuario);
                         encontrado = 1;
                         break;

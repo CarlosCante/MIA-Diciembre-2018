@@ -9,6 +9,7 @@
 #include "REP.h"
 #include "MKFS.h"
 #include "LOGIN.h"
+#include "ABC_GU.h"
 
 int EjecutarComando(char Comando[]);
 void ConvertirMayusculas(char cadena[]);

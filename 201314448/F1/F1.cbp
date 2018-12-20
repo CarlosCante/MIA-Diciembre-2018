@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="ABC_GU.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ABC_GU.h" />
 		<Unit filename="Analizador.c">
 			<Option compilerVar="CC" />
 		</Unit>

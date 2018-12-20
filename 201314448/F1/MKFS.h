@@ -2,7 +2,6 @@
 #define MKFS_H_INCLUDED
 #include "Analizador.h"
 #include "Estructuras.h"
-#include "Analizador.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

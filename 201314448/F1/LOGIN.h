@@ -7,6 +7,6 @@
 #include "Estructuras.h"
 
 void EjecutarLogin(char Usuario[], char Pass[], char pID[]);
-void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass[], char Path[]);
+void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass[], char Path[], char ajuste);
 
 #endif // LOGIN_H_INCLUDED

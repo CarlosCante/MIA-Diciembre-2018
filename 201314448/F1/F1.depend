@@ -1,207 +1,9 @@
 # depslib dependency file v1.0
-1534217118 source:/home/carlos/Proyectos CodeBlocks/F1/main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"Analizador.h"
-	"Estructuras.h"
-
-1534396861 source:/home/carlos/Proyectos CodeBlocks/F1/Analizador.c
+1545253932 source:/home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.c
 	"Analizador.h"
 	<string.h>
 
-1534308896 /home/carlos/Proyectos CodeBlocks/F1/Analizador.h
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"MKDISK.h"
-	"FDISK.h"
-	"MOUNT.h"
-	"REP.h"
-
-1534381640 source:/home/carlos/Proyectos CodeBlocks/F1/MKDISK.c
-	"MKDISK.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-	<time.h>
-
-1534123411 /home/carlos/Proyectos CodeBlocks/F1/MKDISK.h
-	"Estructuras.h"
-	<string.h>
-	<time.h>
-
-1534283506 /home/carlos/Proyectos CodeBlocks/F1/Estructuras.h
-	<time.h>
-
-1534197069 /home/carlos/Proyectos CodeBlocks/F1/FDISK.h
-
-1534395033 source:/home/carlos/Proyectos CodeBlocks/F1/FDISK.c
-	"FDISK.h"
-	"Estructuras.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1534392203 source:/home/carlos/Proyectos CodeBlocks/F1/REP.c
-	"REP.h"
-
-1534349519 /home/carlos/Proyectos CodeBlocks/F1/REP.h
-	"Analizador.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1534386593 /home/carlos/Proyectos CodeBlocks/F1/MOUNT.h
-	"Estructuras.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1534387086 source:/home/carlos/Proyectos CodeBlocks/F1/MOUNT.c
-	"MOUNT.h"
-
-1544292647 source:/home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/FDISK.c
-	"FDISK.h"
-	"Estructuras.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1534197069 /home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/FDISK.h
-
-1544290484 /home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/Estructuras.h
-	<time.h>
-
-1544290694 source:/home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"Analizador.h"
-	"Estructuras.h"
-
-1534308896 /home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/Analizador.h
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"MKDISK.h"
-	"FDISK.h"
-	"MOUNT.h"
-	"REP.h"
-
-1544290677 /home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/MKDISK.h
-	"Estructuras.h"
-	<string.h>
-	<time.h>
-
-1534386593 /home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/MOUNT.h
-	"Estructuras.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1534349519 /home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/REP.h
-	"Analizador.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1544290618 source:/home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/MKDISK.c
-	"MKDISK.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-	<time.h>
-
-1534387086 source:/home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/MOUNT.c
-	"MOUNT.h"
-
-1534392203 source:/home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/REP.c
-	"REP.h"
-
-1544290618 source:/home/carlos/Documentos/ARCHIVOS/Diciembre 2018/F1/Analizador.c
-	"Analizador.h"
-	<string.h>
-
-1544489550 source:/home/carlos/Proyectos Code Blocks/F1/Analizador.c
-	"Analizador.h"
-	<string.h>
-
-1534308896 /home/carlos/Proyectos Code Blocks/F1/Analizador.h
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"MKDISK.h"
-	"FDISK.h"
-	"MOUNT.h"
-	"REP.h"
-
-1544290677 /home/carlos/Proyectos Code Blocks/F1/MKDISK.h
-	"Estructuras.h"
-	<string.h>
-	<time.h>
-
-1544290484 /home/carlos/Proyectos Code Blocks/F1/Estructuras.h
-	<time.h>
-
-1534197069 /home/carlos/Proyectos Code Blocks/F1/FDISK.h
-
-1534386593 /home/carlos/Proyectos Code Blocks/F1/MOUNT.h
-	"Estructuras.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1534349519 /home/carlos/Proyectos Code Blocks/F1/REP.h
-	"Analizador.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1544290694 source:/home/carlos/Proyectos Code Blocks/F1/main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"Analizador.h"
-	"Estructuras.h"
-
-1544489671 source:/home/carlos/Proyectos Code Blocks/F1/MKDISK.c
-	"MKDISK.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-	<time.h>
-
-1534387086 source:/home/carlos/Proyectos Code Blocks/F1/MOUNT.c
-	"MOUNT.h"
-
-1544491585 source:/home/carlos/Proyectos Code Blocks/F1/REP.c
-	"REP.h"
-
-1544503387 source:/home/carlos/Proyectos Code Blocks/F1/FDISK.c
-	"FDISK.h"
-	"Estructuras.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1545195644 source:/home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.c
-	"Analizador.h"
-	<string.h>
-
-1545175020 /home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.h
+1545253932 /home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -211,13 +13,14 @@
 	"REP.h"
 	"MKFS.h"
 	"LOGIN.h"
+	"ABC_GU.h"
 
 1544290677 /home/carlos/Proyectos Code Blocks/201314448/F1/MKDISK.h
 	"Estructuras.h"
 	<string.h>
 	<time.h>
 
-1545186664 /home/carlos/Proyectos Code Blocks/201314448/F1/Estructuras.h
+1545274348 /home/carlos/Proyectos Code Blocks/201314448/F1/Estructuras.h
 	<time.h>
 
 1544819741 /home/carlos/Proyectos Code Blocks/201314448/F1/FDISK.h
@@ -236,6 +39,41 @@
 	<string.h>
 	<ctype.h>
 
+1545253755 /home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.h
+	"Analizador.h"
+	"Estructuras.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<math.h>
+
+1545274348 /home/carlos/Proyectos Code Blocks/201314448/F1/LOGIN.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"Estructuras.h"
+
+1545274968 /home/carlos/Proyectos Code Blocks/201314448/F1/ABC_GU.h
+	"Estructuras.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<math.h>
+
+1544819741 source:/home/carlos/Proyectos Code Blocks/201314448/F1/FDISK.c
+	"FDISK.h"
+	"Estructuras.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1545274383 source:/home/carlos/Proyectos Code Blocks/201314448/F1/LOGIN.c
+	"LOGIN.h"
+
 1545188431 source:/home/carlos/Proyectos Code Blocks/201314448/F1/main.c
 	<stdio.h>
 	<stdlib.h>
@@ -251,40 +89,15 @@
 	<ctype.h>
 	<time.h>
 
-1534387086 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MOUNT.c
+1545255064 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.c
+	"MKFS.h"
+
+1545274269 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MOUNT.c
 	"MOUNT.h"
 
 1544503522 source:/home/carlos/Proyectos Code Blocks/201314448/F1/REP.c
 	"REP.h"
 
-1544819741 source:/home/carlos/Proyectos Code Blocks/201314448/F1/FDISK.c
-	"FDISK.h"
-	"Estructuras.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
-1545170298 /home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.h
-	"Analizador.h"
-	"Estructuras.h"
-	"Analizador.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-	<math.h>
-
-1545181758 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.c
-	"MKFS.h"
-
-1545195427 source:/home/carlos/Proyectos Code Blocks/201314448/F1/LOGIN.c
-	"LOGIN.h"
-
-1545190517 /home/carlos/Proyectos Code Blocks/201314448/F1/LOGIN.h
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-	"Estructuras.h"
+1545278454 source:/home/carlos/Proyectos Code Blocks/201314448/F1/ABC_GU.c
+	"ABC_GU.h"
 
