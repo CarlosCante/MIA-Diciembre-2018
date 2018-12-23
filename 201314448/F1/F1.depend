@@ -40,7 +40,7 @@
 	<string.h>
 	<ctype.h>
 
-1545504421 /home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.h
+1545539986 /home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.h
 	"Analizador.h"
 	"Estructuras.h"
 	"JOURNAL.h"
@@ -91,7 +91,7 @@
 	<ctype.h>
 	<time.h>
 
-1545515233 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.c
+1545600327 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.c
 	"MKFS.h"
 
 1545274269 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MOUNT.c
@@ -114,7 +114,7 @@
 	<ctype.h>
 	<math.h>
 
-1545535058 /home/carlos/Proyectos Code Blocks/201314448/F1/MKDIR.h
+1545599338 /home/carlos/Proyectos Code Blocks/201314448/F1/MKDIR.h
 	"Analizador.h"
 	"Estructuras.h"
 	"JOURNAL.h"
@@ -124,6 +124,6 @@
 	<ctype.h>
 	<math.h>
 
-1545535091 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKDIR.c
+1545600019 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKDIR.c
 	"MKDIR.h"
 

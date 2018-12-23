@@ -124,7 +124,7 @@ void ReiniciarBitMaps(FILE *DISCO, int InicioParticion)
 
     for(int i = 0 ; i < SB->Inodos_count ; i++)
     {
-        fseek(DISCO, SB->inicio_Inodos + i, SEEK_SET);
+        fseek(DISCO, SB->inicio_BM_Inodos + i, SEEK_SET);
         fwrite("0", sizeof(char), 1, DISCO);
     }
 

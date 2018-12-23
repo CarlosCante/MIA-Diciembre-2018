@@ -12,7 +12,7 @@
 void EjecutarMKDIR(char Path[], char P);
 int ExisteHijo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[]);
 int CrearCarpeta(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[]);
-int BuscarPosicionInodo(FILE *DISCO, SuperBloque *SB);
+int BuscarPosicionInodo(FILE *DISCO, SuperBloque *SB, int Cantidad);
 int BuscarPosicionBloques(FILE *DISCO, SuperBloque *SB, int Cantidad);
 
 
