@@ -1,12 +1,13 @@
 # depslib dependency file v1.0
-1545253932 source:/home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.c
+1545527218 source:/home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.c
 	"Analizador.h"
 	<string.h>
 
-1545253932 /home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.h
+1545516449 /home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"MKDIR.h"
 	"MKDISK.h"
 	"FDISK.h"
 	"MOUNT.h"
@@ -20,7 +21,7 @@
 	<string.h>
 	<time.h>
 
-1545274348 /home/carlos/Proyectos Code Blocks/201314448/F1/Estructuras.h
+1545506005 /home/carlos/Proyectos Code Blocks/201314448/F1/Estructuras.h
 	<time.h>
 
 1544819741 /home/carlos/Proyectos Code Blocks/201314448/F1/FDISK.h
@@ -39,9 +40,10 @@
 	<string.h>
 	<ctype.h>
 
-1545253755 /home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.h
+1545504421 /home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.h
 	"Analizador.h"
 	"Estructuras.h"
+	"JOURNAL.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -55,7 +57,7 @@
 	<ctype.h>
 	"Estructuras.h"
 
-1545274968 /home/carlos/Proyectos Code Blocks/201314448/F1/ABC_GU.h
+1545282378 /home/carlos/Proyectos Code Blocks/201314448/F1/ABC_GU.h
 	"Estructuras.h"
 	<stdio.h>
 	<stdlib.h>
@@ -71,10 +73,10 @@
 	<string.h>
 	<ctype.h>
 
-1545274383 source:/home/carlos/Proyectos Code Blocks/201314448/F1/LOGIN.c
+1545283209 source:/home/carlos/Proyectos Code Blocks/201314448/F1/LOGIN.c
 	"LOGIN.h"
 
-1545188431 source:/home/carlos/Proyectos Code Blocks/201314448/F1/main.c
+1545506005 source:/home/carlos/Proyectos Code Blocks/201314448/F1/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -89,7 +91,7 @@
 	<ctype.h>
 	<time.h>
 
-1545255064 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.c
+1545515233 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKFS.c
 	"MKFS.h"
 
 1545274269 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MOUNT.c
@@ -98,6 +100,30 @@
 1544503522 source:/home/carlos/Proyectos Code Blocks/201314448/F1/REP.c
 	"REP.h"
 
-1545278454 source:/home/carlos/Proyectos Code Blocks/201314448/F1/ABC_GU.c
+1545515904 source:/home/carlos/Proyectos Code Blocks/201314448/F1/ABC_GU.c
 	"ABC_GU.h"
+
+1545515233 source:/home/carlos/Proyectos Code Blocks/201314448/F1/JOURNAL.c
+	"JOURNAL.h"
+
+1545515233 /home/carlos/Proyectos Code Blocks/201314448/F1/JOURNAL.h
+	"Estructuras.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<math.h>
+
+1545535058 /home/carlos/Proyectos Code Blocks/201314448/F1/MKDIR.h
+	"Analizador.h"
+	"Estructuras.h"
+	"JOURNAL.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<math.h>
+
+1545535091 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKDIR.c
+	"MKDIR.h"
 

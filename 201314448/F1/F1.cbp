@@ -46,10 +46,18 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="FDISK.h" />
+		<Unit filename="JOURNAL.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="JOURNAL.h" />
 		<Unit filename="LOGIN.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LOGIN.h" />
+		<Unit filename="MKDIR.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="MKDIR.h" />
 		<Unit filename="MKDISK.c">
 			<Option compilerVar="CC" />
 		</Unit>

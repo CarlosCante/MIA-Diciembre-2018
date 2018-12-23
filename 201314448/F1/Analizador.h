@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "MKDIR.h"
 #include "MKDISK.h"
 #include "FDISK.h"
 #include "MOUNT.h"

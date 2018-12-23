@@ -4,6 +4,9 @@
 int EjecutarComando(char Comando[])
 {
     extern UsuarioLogeado *UsuarioActual;
+    extern Journaling *OperacionActual;
+
+    strcpy(OperacionActual->Tipo_Operacion, Comando);
 
     if(Comando[0] != '\n')
     {
@@ -33,6 +36,10 @@ int EjecutarComando(char Comando[])
         /**Parametros para el control de usuarios**/
         char pUSR[10] = "\0";
         char pPWD[10] = "\0";
+        char pGRP[10] = "\0";
+
+        /**Parametros varios**/
+        char pP = 'N';
 
 
 
@@ -117,6 +124,13 @@ int EjecutarComando(char Comando[])
                     break;
                 }
 
+                if(Comando[i] == '-' && (Comando[i+1] == 'p' || Comando[i+1] == 'P') && (Comando[i+2] == ' ' || Comando[i+2] == '\n' || Comando[i+2] == '\r'))
+                {
+                    pP = 'S';
+                    i++;
+                    i++;
+                }
+
                 if(Comando[i] == '>')
                 {
                     j = 0;
@@ -155,6 +169,15 @@ int EjecutarComando(char Comando[])
                         while(Comando[i] != ' ' && Comando[i] != '\n' && Comando[i] != '\r')
                         {
                             pPWD[j] = Comando[i];
+                            i++;
+                            j++;
+                        }
+                    }
+                    else if(strcmp(ParametroAux,"GRP") == 0)
+                    {
+                        while(Comando[i] != ' ' && Comando[i] != '\n' && Comando[i] != '\r')
+                        {
+                            pGRP[j] = Comando[i];
                             i++;
                             j++;
                         }
@@ -227,6 +250,12 @@ int EjecutarComando(char Comando[])
                             i++;
                             j++;
                         }
+                    }
+                    else if(strcmp(ParametroAux,"P") == 0)
+                    {
+                        pP = 'S';
+                        i++;
+                        j++;
                     }
                     else if(strcmp(ParametroAux,"PATH") == 0)
                     {
@@ -371,6 +400,14 @@ int EjecutarComando(char Comando[])
         else if(strcmp(Funsion, "MKGRP") == 0)
         {
             EjecutarMKGRP(pName);
+        }
+        else if(strcmp(Funsion, "MKUSR") == 0)
+        {
+            EjecutarMKUSR(pUSR, pPWD, pGRP);
+        }
+        else if(strcmp(Funsion, "MKDIR") == 0)
+        {
+            EjecutarMKDIR(pPath, pP);
         }
         else if(strcmp(Funsion,"SALIR") == 0)
         {

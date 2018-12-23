@@ -2,69 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="REP.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="MKFS.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="46" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ABC_GU.c" open="1" top="1" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3214" topLine="126" />
-		</Cursor>
-	</File>
-	<File name="FDISK.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="122" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Estructuras.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="765" topLine="15" />
-		</Cursor>
-	</File>
-	<File name="Analizador.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="211" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="MKDISK.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="114" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="MKFS.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2910" topLine="184" />
-		</Cursor>
-	</File>
-	<File name="LOGIN.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="312" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="REP.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="634" topLine="135" />
-		</Cursor>
-	</File>
-	<File name="FDISK.c" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="19631" topLine="587" />
-		</Cursor>
-	</File>
-	<File name="MKFS.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="371" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="MKDISK.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6590" topLine="243" />
-		</Cursor>
-	</File>
-	<File name="LOGIN.c" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="123" topLine="0" />
+			<Cursor1 position="9406" topLine="263" />
 		</Cursor>
 	</File>
 	<File name="MOUNT.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -72,19 +12,115 @@
 			<Cursor1 position="385" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Analizador.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2908" topLine="93" />
+			<Cursor1 position="805" topLine="9" />
 		</Cursor>
 	</File>
-	<File name="MOUNT.c" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+	<File name="Analizador.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="124" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="412" />
+		</Folding>
+	</File>
+	<File name="REP.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="46" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="MKDIR.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="459" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="MKFS.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="429" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="MKDISK.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6590" topLine="243" />
+		</Cursor>
+	</File>
+	<File name="ABC_GU.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="172" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="REP.c" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="634" topLine="135" />
+		</Cursor>
+	</File>
+	<File name="LOGIN.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="312" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ABC_GU.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="16649" topLine="335" />
+		</Cursor>
+		<Folding>
+			<Collapse line="3" />
+		</Folding>
+	</File>
+	<File name="MOUNT.c" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2437" topLine="13" />
 		</Cursor>
 	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Estructuras.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="181" topLine="0" />
+			<Cursor1 position="1318" topLine="57" />
 		</Cursor>
+	</File>
+	<File name="FDISK.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="122" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="JOURNAL.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="309" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="FDISK.c" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="19631" topLine="587" />
+		</Cursor>
+	</File>
+	<File name="MKDISK.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="114" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="LOGIN.c" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3597" topLine="113" />
+		</Cursor>
+	</File>
+	<File name="Analizador.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="137" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="JOURNAL.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="MKDIR.c" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3871" topLine="72" />
+		</Cursor>
+		<Folding>
+			<Collapse line="60" />
+			<Collapse line="197" />
+			<Collapse line="288" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>

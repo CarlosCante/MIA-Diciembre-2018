@@ -6,6 +6,7 @@
 
 struct ListaMomunt *LISTADO;
 struct UsuarioLogeado *UsuarioActual;
+struct Journaling *OperacionActual;
 
 int main()
 {
@@ -13,6 +14,15 @@ int main()
 
     LISTADO = (struct ListaMomunt*)malloc(sizeof(struct ListaMomunt));
     UsuarioActual = (struct UsuarioLogeado*)malloc(sizeof(struct UsuarioLogeado));
+    OperacionActual = (struct Journaling*)malloc(sizeof(struct Journaling));
+
+    strcpy(OperacionActual->Tipo_Operacion, "\0");
+    OperacionActual->Tipo_Elemento = 'N';
+    strcpy(OperacionActual->nombre, "\0");
+    strcpy(OperacionActual->contenido, "\0");
+    strcpy(OperacionActual->fecha, "\0");
+    strcpy(OperacionActual->propietario, "\0");
+    strcpy(OperacionActual->permisos, "\0");
 
     while(1)
     {
@@ -26,5 +36,8 @@ int main()
 
     }
 
+    free(LISTADO);
+    free(UsuarioActual);
+    free(OperacionActual);
     return 0;
 }

@@ -4,6 +4,8 @@
 void EjecutarMKFS(char pID[], char pType[])
 {
     extern ListaMomunt *LISTADO;
+    extern Journaling *OperacionActual;
+
     char PathDisco[100] = "\0";
     int existe = 0;
 
@@ -65,6 +67,8 @@ void EjecutarMKFS(char pID[], char pType[])
             fseek(DISCO, aux->inicio, SEEK_SET);
             fwrite(SB, sizeof(struct SuperBloque), 1, DISCO);
 
+            CrearJournal(DISCO, aux->inicio, n);
+
             free(MBRDisco);
             free(SB);
 
@@ -83,6 +87,15 @@ void EjecutarMKFS(char pID[], char pType[])
             CrearUsersTXT(DISCO, aux->inicio);
 
             //ComprobarUsersTXT(DISCO, aux->inicio);
+
+            /**Guardamos la operacion en el journaling de la particion**/
+            OperacionActual->Tipo_Elemento = '1';
+            strcpy(OperacionActual->nombre, "/users.txt");
+            strcpy(OperacionActual->fecha, FechaYHoraActual());
+            strcpy(OperacionActual->propietario, "root");
+            strcpy(OperacionActual->permisos, "007");
+
+            NuevoOperacionJournaling(DISCO, aux->inicio);
 
             fclose(DISCO);
         }

@@ -91,7 +91,7 @@ void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass
 
     typedef struct Linea
     {
-        char Conten[20];
+        char Conten[100];
     }Linea;
 
     Linea Lineas[100];
