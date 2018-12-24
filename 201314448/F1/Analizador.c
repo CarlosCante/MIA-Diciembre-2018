@@ -40,6 +40,7 @@ int EjecutarComando(char Comando[])
 
         /**Parametros varios**/
         char pP = 'N';
+        char pCont[100] = "\0";
 
 
 
@@ -279,6 +280,28 @@ int EjecutarComando(char Comando[])
                             }
                         }
                     }
+                    else if(strcmp(ParametroAux,"CONT") == 0)
+                    {
+                        if(Comando[i] == '"')
+                        {
+                            i++;
+                            while(Comando[i] != '"')
+                            {
+                                pCont[j] = Comando[i];
+                                i++;
+                                j++;
+                            }
+                        }
+                        else
+                        {
+                            while(Comando[i] != ' ' && Comando[i] != '\n' && Comando[i] != '\r')
+                            {
+                                pCont[j] = Comando[i];
+                                i++;
+                                j++;
+                            }
+                        }
+                    }
                     else
                     {
                         printf("La palabra \"%s\" no es un parametro reconocido.\n\n", ParametroAux);
@@ -404,6 +427,10 @@ int EjecutarComando(char Comando[])
         else if(strcmp(Funsion, "MKUSR") == 0)
         {
             EjecutarMKUSR(pUSR, pPWD, pGRP);
+        }
+        else if(strcmp(Funsion, "MKFILE") == 0)
+        {
+            EjecutarMKFILE(pPath, pP, pSize, pCont);
         }
         else if(strcmp(Funsion, "MKDIR") == 0)
         {

@@ -62,6 +62,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="MKDISK.h" />
+		<Unit filename="MKFILE.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="MKFILE.h" />
 		<Unit filename="MKFS.c">
 			<Option compilerVar="CC" />
 		</Unit>

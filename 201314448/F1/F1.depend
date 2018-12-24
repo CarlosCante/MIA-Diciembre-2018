@@ -1,12 +1,13 @@
 # depslib dependency file v1.0
-1545527218 source:/home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.c
+1545611789 source:/home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.c
 	"Analizador.h"
 	<string.h>
 
-1545516449 /home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.h
+1545611699 /home/carlos/Proyectos Code Blocks/201314448/F1/Analizador.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"MKFILE.h"
 	"MKDIR.h"
 	"MKDISK.h"
 	"FDISK.h"
@@ -124,6 +125,20 @@
 	<ctype.h>
 	<math.h>
 
-1545600019 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKDIR.c
+1545600891 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKDIR.c
 	"MKDIR.h"
+
+1545613400 source:/home/carlos/Proyectos Code Blocks/201314448/F1/MKFILE.c
+	"MKFILE.h"
+
+1545612628 /home/carlos/Proyectos Code Blocks/201314448/F1/MKFILE.h
+	"Analizador.h"
+	"Estructuras.h"
+	"MKDIR.h"
+	"JOURNAL.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<math.h>
 
