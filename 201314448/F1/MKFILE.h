@@ -12,6 +12,8 @@
 
 void EjecutarMKFILE(char Path[], char P, char pSize[], char Cont[]);
 void CrearArchivo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[], char Size[], char Cont[]);
+void EJecutarCAT(char Path[]);
+void MostrarContenidoArchivo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[]);
 
 
 #endif // MKFILE_H_INCLUDED

@@ -194,7 +194,7 @@ int CrearCarpeta(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[])
 
     if(EncontroEspacio == 0)
     {
-        PosBloquePadre = ObtenerBloqueLibre(DISCO, SB, 1, UsuarioActual->ajuste);
+        PosBloquePadre = BuscarPosicionBloques(DISCO, SB, 1);
         fseek(DISCO, SB->inicio_BM_Bloques + PosBloquePadre, SEEK_SET);
         fwrite("1", sizeof(char), 1, DISCO);
 
@@ -213,7 +213,7 @@ int CrearCarpeta(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[])
 
         for(int i = 0 ; i < 12 ; i++)
         {
-            if(InodoPadre->ap_Bloques[i] != -1)
+            if(InodoPadre->ap_Bloques[i] == -1)
             {
                 InodoPadre->ap_Bloques[i] = PosBloquePadre;
                 break;

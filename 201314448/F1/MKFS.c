@@ -218,7 +218,7 @@ void CrearUsersTXT(FILE *DISCO, int InicioParticion)
     struct BloqueArchivo *BloqueA = (struct BloqueArchivo*)malloc(sizeof(struct BloqueArchivo));
     memset(BloqueA, 0, sizeof(BloqueArchivo));
 
-    strcpy(BloqueA->Contenido,"1,G,root\n1,U,root,root,123\n2,U,root,Carlos,1993\n");
+    strcpy(BloqueA->Contenido,"1,G,root\n1,U,root,root,123\n");
 
     /**Escribimos en el disco los inodos y los abloques que creamos******************************************/
 

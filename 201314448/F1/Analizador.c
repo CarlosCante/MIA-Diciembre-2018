@@ -41,6 +41,7 @@ int EjecutarComando(char Comando[])
         /**Parametros varios**/
         char pP = 'N';
         char pCont[100] = "\0";
+        char pfile[100] = "\0";
 
 
 
@@ -280,6 +281,28 @@ int EjecutarComando(char Comando[])
                             }
                         }
                     }
+                    else if(strcmp(ParametroAux,"FILE") == 0)
+                    {
+                        if(Comando[i] == '"')
+                        {
+                            i++;
+                            while(Comando[i] != '"')
+                            {
+                                pfile[j] = Comando[i];
+                                i++;
+                                j++;
+                            }
+                        }
+                        else
+                        {
+                            while(Comando[i] != ' ' && Comando[i] != '\n' && Comando[i] != '\r')
+                            {
+                                pfile[j] = Comando[i];
+                                i++;
+                                j++;
+                            }
+                        }
+                    }
                     else if(strcmp(ParametroAux,"CONT") == 0)
                     {
                         if(Comando[i] == '"')
@@ -435,6 +458,10 @@ int EjecutarComando(char Comando[])
         else if(strcmp(Funsion, "MKDIR") == 0)
         {
             EjecutarMKDIR(pPath, pP);
+        }
+        else if(strcmp(Funsion, "CAT") == 0)
+        {
+            EJecutarCAT(pfile);
         }
         else if(strcmp(Funsion,"SALIR") == 0)
         {
