@@ -3,6 +3,7 @@
 void EjecutarMKDIR(char Path[], char P)
 {
     extern UsuarioLogeado *UsuarioActual;
+    extern Journaling *OperacionActual;
 
     char PathAux[100] = "\0";
     strcpy(PathAux, Path);
@@ -51,6 +52,15 @@ void EjecutarMKDIR(char Path[], char P)
             }
         }
 
+        OperacionActual->Tipo_Operacion = '3';
+        OperacionActual->Tipo_Elemento = '0';
+        strcpy(OperacionActual->nombre, PathAux);
+        strcpy(OperacionActual->fecha, FechaYHoraActual());
+        strcpy(OperacionActual->propietario, UsuarioActual->Nombre);
+        OperacionActual->permisos = 664;
+
+        NuevoOperacionJournaling(DISCO, UsuarioActual->InicioParticion);
+
         printf("Se creo correctamente la ruta \"%s\".\n",PathAux);
     }
     else if(P == 'N')/**Solo se debe crear la ultima carpeta**/
@@ -64,6 +74,16 @@ void EjecutarMKDIR(char Path[], char P)
                 if(i + 1 == No_Carpetas)
                 {
                     Hijo = CrearCarpeta(DISCO, SB, Padre, ListadoCarpetas[i].Nombre);
+
+                    OperacionActual->Tipo_Operacion = '3';
+                    OperacionActual->Tipo_Elemento = '0';
+                    strcpy(OperacionActual->nombre, PathAux);
+                    strcpy(OperacionActual->fecha, FechaYHoraActual());
+                    strcpy(OperacionActual->propietario, UsuarioActual->Nombre);
+                    OperacionActual->permisos = 664;
+
+                    NuevoOperacionJournaling(DISCO, UsuarioActual->InicioParticion);
+
                     printf("Se creo correctamente la ruta \"%s\".\n",PathAux);
                     break;
                 }
@@ -119,6 +139,10 @@ int ExisteHijo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[])
         }
     }
 
+    strcpy(InodoTMP->fecha_lectura, FechaYHoraActual());
+    fseek(DISCO, SB->inicio_Inodos + sizeof(Inodo)*Padre, SEEK_SET);
+    fwrite(InodoTMP, sizeof(Inodo), 1, DISCO);
+
     free(InodoTMP);
     free(BloqueTMP);
 
@@ -151,10 +175,13 @@ int CrearCarpeta(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[])
     int PosHijoInodo = BuscarPosicionInodo(DISCO, SB, 1);
     fseek(DISCO, SB->inicio_BM_Inodos + PosHijoInodo, SEEK_SET);
     fwrite("1", sizeof(char), 1, DISCO);
+    SB->free_Inodos_count--;
 
     int PosHijoBloque = BuscarPosicionBloques(DISCO, SB, 1);
     fseek(DISCO, SB->inicio_BM_Bloques + PosHijoBloque, SEEK_SET);
     fwrite("1", sizeof(char), 1, DISCO);
+    SB->free_Bloques_count--;
+    SB->first_free_Bloque = ObtenerPrimerBloqueLibre(DISCO, SB);
 
 
 
@@ -197,6 +224,8 @@ int CrearCarpeta(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[])
         PosBloquePadre = BuscarPosicionBloques(DISCO, SB, 1);
         fseek(DISCO, SB->inicio_BM_Bloques + PosBloquePadre, SEEK_SET);
         fwrite("1", sizeof(char), 1, DISCO);
+        SB->free_Bloques_count--;
+        SB->first_free_Bloque = ObtenerPrimerBloqueLibre(DISCO, SB);
 
 
         strcpy(BloquePadre->b_content[0].nombre, Nombre);
@@ -285,7 +314,8 @@ int CrearCarpeta(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[])
     fseek(DISCO, SB->inicio_Bloques + PosHijoBloque*sizeof(BloqueCarpeta), SEEK_SET);
     fwrite(BloqueHijo, sizeof(BloqueCarpeta), 1, DISCO);
 
-
+    fseek(DISCO, UsuarioActual->InicioParticion, SEEK_SET);
+    fwrite(SB, sizeof(SuperBloque), 1, DISCO);
 
     free(InodoPadre);
     free(BloquePadre);
@@ -476,3 +506,5 @@ int BuscarPosicionBloques(FILE *DISCO, SuperBloque *SB, int Cantidad)
 
     return Inicio;
 }
+
+

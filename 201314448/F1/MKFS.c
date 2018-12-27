@@ -1,6 +1,5 @@
 #include "MKFS.h"
 
-
 void EjecutarMKFS(char pID[], char pType[])
 {
     extern ListaMomunt *LISTADO;
@@ -89,11 +88,12 @@ void EjecutarMKFS(char pID[], char pType[])
             //ComprobarUsersTXT(DISCO, aux->inicio);
 
             /**Guardamos la operacion en el journaling de la particion**/
+            OperacionActual->Tipo_Operacion = '1';
             OperacionActual->Tipo_Elemento = '1';
             strcpy(OperacionActual->nombre, "/users.txt");
             strcpy(OperacionActual->fecha, FechaYHoraActual());
             strcpy(OperacionActual->propietario, "root");
-            strcpy(OperacionActual->permisos, "007");
+            OperacionActual->permisos = 007;
 
             NuevoOperacionJournaling(DISCO, aux->inicio);
 

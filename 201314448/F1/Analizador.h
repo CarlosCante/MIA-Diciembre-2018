@@ -13,7 +13,7 @@
 #include "LOGIN.h"
 #include "ABC_GU.h"
 
-int EjecutarComando(char Comando[]);
+int EjecutarComando(char Comando[], int tipo);
 void ConvertirMayusculas(char cadena[]);
 void Split(char Linea[], char *Destino[]);
 void EjecutarArchivo(char* ruta);

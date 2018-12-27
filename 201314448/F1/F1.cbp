@@ -74,6 +74,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="MOUNT.h" />
+		<Unit filename="REM.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="REM.h" />
 		<Unit filename="REP.c">
 			<Option compilerVar="CC" />
 		</Unit>

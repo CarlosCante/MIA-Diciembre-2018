@@ -3,6 +3,7 @@
 void EjecutarMKFILE(char Path[], char P, char pSize[], char Cont[])
 {
     extern UsuarioLogeado *UsuarioActual;
+    extern Journaling *OperacionActual;
 
     char PathAux[100] = "\0";
     strcpy(PathAux, Path);
@@ -74,6 +75,16 @@ void EjecutarMKFILE(char Path[], char P, char pSize[], char Cont[])
         Padre = Hijo;
 
         CrearArchivo(DISCO, SB, Padre, ListadoCarpetas[No_Carpetas - 1].Nombre, pSize, Cont);
+
+        OperacionActual->Tipo_Operacion = '1';
+        OperacionActual->Tipo_Elemento = '1';
+        strcpy(OperacionActual->nombre, PathAux);
+        strcpy(OperacionActual->fecha, FechaYHoraActual());
+        strcpy(OperacionActual->propietario, UsuarioActual->Nombre);
+        OperacionActual->permisos = 664;
+
+        NuevoOperacionJournaling(DISCO, UsuarioActual->InicioParticion);
+
         printf("Se creo el archivo \"%s\"\n\n",PathAux);
     }
     else
@@ -160,12 +171,7 @@ void CrearArchivo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[], char S
     fseek(DISCO, SB->inicio_BM_Inodos + PosHijoInodo, SEEK_SET);
     fwrite("1", sizeof(char), 1, DISCO);
 
-    int PosHijoBloque = BuscarPosicionBloques(DISCO, SB, TamanioArchivo);
-    for(int i = 0 ; i < TamanioArchivo ; i++)
-    {
-        fseek(DISCO, SB->inicio_BM_Bloques + PosHijoBloque + i, SEEK_SET);
-        fwrite("1", sizeof(char), 1, DISCO);
-    }
+
 
 
 
@@ -307,6 +313,13 @@ void CrearArchivo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[], char S
         }
     }
 
+    int PosHijoBloque = BuscarPosicionBloques(DISCO, SB, BloquesNesesarios);
+    for(int i = 0 ; i < BloquesNesesarios ; i++)
+    {
+        fseek(DISCO, SB->inicio_BM_Bloques + PosHijoBloque + i, SEEK_SET);
+        fwrite("1", sizeof(char), 1, DISCO);
+    }
+
     for(int i = 0 ; i < BloquesNesesarios ; i++)
     {
         InodoHijo->ap_Bloques[i] = PosHijoBloque + i;
@@ -322,6 +335,9 @@ void CrearArchivo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[], char S
         InodoHijo->ap_Bloques[i] = -1;
     }
 
+    InodoHijo->tipo = '1';
+    InodoHijo->Permisos = 664;
+
     /**Escribimos en el disco el nuevo inodo ***********************************************************/
 
     fseek(DISCO, SB->inicio_Inodos + PosHijoInodo*sizeof(Inodo), SEEK_SET);
@@ -336,7 +352,7 @@ void CrearArchivo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[], char S
     return PosHijoInodo;
 }
 
-void EJecutarCAT(char Path[])
+void EJecutarCAT(char Path[], int reporte, char Ruta[])
 {
     extern UsuarioLogeado *UsuarioActual;
 
@@ -394,8 +410,15 @@ void EJecutarCAT(char Path[])
     if(ExisteRuta == 1)
     {
         Padre = Hijo;
+        if(reporte == 0)
+        {
+            MostrarContenidoArchivo(DISCO, SB, Padre, ListadoCarpetas[No_Carpetas - 1].Nombre);
+        }
+        else if (reporte == 1)
+        {
+            GenerarReporteFile(DISCO, SB, Padre, ListadoCarpetas[No_Carpetas - 1].Nombre, Ruta);
+        }
 
-        MostrarContenidoArchivo(DISCO, SB, Padre, ListadoCarpetas[No_Carpetas - 1].Nombre);
     }
     else
     {
@@ -432,6 +455,40 @@ void MostrarContenidoArchivo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombr
         }
 
         printf("\n");
+
+        free(BloqueTMP);
+        free(InodoTMP);
+}
+
+void GenerarReporteFile(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[], char Destino[])
+{
+        struct Inodo *InodoTMP = (struct Inodo*)malloc(sizeof(struct Inodo));
+        memset(InodoTMP, 0, sizeof(Inodo));
+
+        struct BloqueArchivo *BloqueTMP = (struct BloqueArchivo*)malloc(sizeof(struct BloqueArchivo));
+        memset(BloqueTMP, 0, sizeof(BloqueArchivo));
+
+        fseek(DISCO, SB->inicio_Inodos + Padre*sizeof(Inodo), SEEK_SET);
+        fread(InodoTMP, sizeof(Inodo), 1, DISCO);
+
+        FILE *TXT;
+        TXT = fopen(Destino, "w");
+        if(TXT != NULL)
+        {
+            for(int i = 0 ; i < 12 ; i++)
+            {
+                if(InodoTMP->ap_Bloques[i] != -1)
+                {
+                    fseek(DISCO, SB->inicio_Bloques + InodoTMP->ap_Bloques[i]*sizeof(BloqueArchivo), SEEK_SET);
+                    fread(BloqueTMP, sizeof(BloqueArchivo), 1, DISCO);
+
+                    fprintf(TXT, "%s",BloqueTMP->Contenido);
+                }
+            }
+
+            fclose(TXT);
+            printf("Se genero el reporte FILE correctamente.\n\n");
+        }
 
         free(BloqueTMP);
         free(InodoTMP);

@@ -13,7 +13,6 @@ void CrearGrupo(char name[]);
 int VerificarSiGrupoExiste(char name[]);
 void CrearUsusario(char Usuario[], char Pass[], char GrupoN[]);
 int VerificarSiUsuarioExiste(char Usuario[]);
-int ObtenerBloqueLibre(FILE *DISCO, SuperBloque *SB, int cantidad, char Ajuste);
 int ObtenerPrimerBloqueLibre(FILE *DISCO, SuperBloque *SB);
 int largo_cadena(char cadena[]);
 

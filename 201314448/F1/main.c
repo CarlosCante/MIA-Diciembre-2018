@@ -16,20 +16,21 @@ int main()
     UsuarioActual = (struct UsuarioLogeado*)malloc(sizeof(struct UsuarioLogeado));
     OperacionActual = (struct Journaling*)malloc(sizeof(struct Journaling));
 
-    strcpy(OperacionActual->Tipo_Operacion, "\0");
+    OperacionActual->Tipo_Operacion = '\0';
     OperacionActual->Tipo_Elemento = 'N';
     strcpy(OperacionActual->nombre, "\0");
     strcpy(OperacionActual->contenido, "\0");
     strcpy(OperacionActual->fecha, "\0");
     strcpy(OperacionActual->propietario, "\0");
-    strcpy(OperacionActual->permisos, "\0");
+    OperacionActual->permisos = 0;
+
 
     while(1)
     {
         printf("Comando->   ");
         fgets(Comando, 150, stdin);
 
-        if(EjecutarComando(Comando) == 1)
+        if(EjecutarComando(Comando, 0) == 1)
         {
             break;
         }

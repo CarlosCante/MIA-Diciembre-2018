@@ -18,11 +18,12 @@ void EjecutarMKGRP(char name[])
                 FILE *DISCO;
                 DISCO = fopen(UsuarioActual->PathDisco,"r+b");
 
+                OperacionActual->Tipo_Operacion = '2';
                 OperacionActual->Tipo_Elemento = '1';
                 strcpy(OperacionActual->nombre, "/users.txt");
                 strcpy(OperacionActual->fecha, FechaYHoraActual());
                 strcpy(OperacionActual->propietario, "root");
-                strcpy(OperacionActual->permisos, "007");
+                OperacionActual->permisos = 007;
 
                 NuevoOperacionJournaling(DISCO, UsuarioActual->InicioParticion);
 
@@ -64,11 +65,12 @@ void EjecutarMKUSR(char Usuario[], char Pass[], char Grupo[])
                     FILE *DISCO;
                     DISCO = fopen(UsuarioActual->PathDisco,"r+b");
 
+                    OperacionActual->Tipo_Operacion = '2';
                     OperacionActual->Tipo_Elemento = '1';
                     strcpy(OperacionActual->nombre, "/users.txt");
                     strcpy(OperacionActual->fecha, FechaYHoraActual());
                     strcpy(OperacionActual->propietario, "root");
-                    strcpy(OperacionActual->permisos, "007");
+                    OperacionActual->permisos = 007;
 
                     NuevoOperacionJournaling(DISCO, UsuarioActual->InicioParticion);
 
@@ -522,13 +524,14 @@ void CrearGrupo(char name[])
 
             SB->first_free_Bloque = ObtenerPrimerBloqueLibre(DISCO, SB);
             SB->free_Bloques_count--;
-
         }
     }
+
 
     fseek(DISCO, UsuarioActual->InicioParticion, SEEK_SET);
     fwrite(SB, sizeof(SuperBloque), 1, DISCO);
 
+    strcpy(InodoTMP->fecha_lectura, FechaYHoraActual());
     fseek(DISCO, SB->inicio_Inodos + sizeof(Inodo), SEEK_SET);
     fwrite(InodoTMP, sizeof(Inodo), 1, DISCO);
 
@@ -644,26 +647,6 @@ int VerificarSiGrupoExiste(char name[])
     fclose(DISCO);
 
     return resultado;
-}
-
-int ObtenerBloqueLibre(FILE *DISCO, SuperBloque *SB, int cantidad, char Ajuste)
-{
-
-
-    if(Ajuste == 'B')
-    {
-
-    }
-    else if(Ajuste == 'F')
-    {
-
-    }
-    else if(Ajuste == 'W')
-    {
-
-    }
-
-    return -1;
 }
 
 int ObtenerPrimerBloqueLibre(FILE *DISCO, SuperBloque *SB)

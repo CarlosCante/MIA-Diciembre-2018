@@ -140,6 +140,8 @@ void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass
                         UsuarioActual->InicioParticion = InicioParticion;
                         UsuarioActual->ajuste = ajuste;
                         printf("Se logeo correctamente con el usuario \"%s\".\n\n",Usuario);
+
+
                         encontrado = 1;
                         break;
                     }

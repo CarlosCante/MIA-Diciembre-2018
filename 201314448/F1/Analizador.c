@@ -1,16 +1,18 @@
 #include "Analizador.h"
 #include <string.h>
 
-int EjecutarComando(char Comando[])
+int EjecutarComando(char Comando[], int tipo)
 {
     extern UsuarioLogeado *UsuarioActual;
     extern Journaling *OperacionActual;
 
-    strcpy(OperacionActual->Tipo_Operacion, Comando);
-
-    if(Comando[0] != '\n')
+    if(Comando[0] == '#')
     {
-        printf("==========================COMANDO=========================\n%s\n",Comando);
+        printf("\n%s\n", Comando);
+    }
+    else if(Comando[1] != '\n' && tipo == 0)
+    {
+        printf("\n\n=================================COMANDO========================================\n%s\n",Comando);
         printf("RESULTADO DEL COMANDO:\n\n");
     }
 
@@ -42,6 +44,7 @@ int EjecutarComando(char Comando[])
         char pP = 'N';
         char pCont[100] = "\0";
         char pfile[100] = "\0";
+        char pRuta[100] = "\0";
 
 
 
@@ -109,12 +112,6 @@ int EjecutarComando(char Comando[])
                 i++;
 
             }
-        }
-        else if(strcmp(Funsion, "LOGOUT") == 0)
-        {
-            UsuarioActual->Estado = '0';
-            printf("Se cerro sesion del usuario \"%s\"\n\n",UsuarioActual->Nombre);
-            return;
         }
         else
         {
@@ -281,6 +278,28 @@ int EjecutarComando(char Comando[])
                             }
                         }
                     }
+                    else if(strcmp(ParametroAux,"RUTA") == 0)
+                    {
+                        if(Comando[i] == '"')
+                        {
+                            i++;
+                            while(Comando[i] != '"')
+                            {
+                                pRuta[j] = Comando[i];
+                                i++;
+                                j++;
+                            }
+                        }
+                        else
+                        {
+                            while(Comando[i] != ' ' && Comando[i] != '\n' && Comando[i] != '\r')
+                            {
+                                pRuta[j] = Comando[i];
+                                i++;
+                                j++;
+                            }
+                        }
+                    }
                     else if(strcmp(ParametroAux,"FILE") == 0)
                     {
                         if(Comando[i] == '"')
@@ -420,16 +439,11 @@ int EjecutarComando(char Comando[])
         }
         else if(strcmp(Funsion,"REP") == 0)
         {
-            /*
-            printf("Comando: REP\n");
-            printf("Path: %s\n", pPath);
-            printf("Name: %s\n", pName);
-            printf("ID: %s\n\n", pId);
-            */
-            EjecutarREP(pName, pPath, pId);
+            EjecutarREP(pName, pPath, pId, pRuta);
         }
         else if(strcmp(Funsion,"MKFS") == 0)/*************************************Comandos de segunda fase proyecto*******************************************/
         {
+            strcpy(OperacionActual->contenido, Comando);
             EjecutarMKFS(pId, pType);
         }
         else if(strcmp(Funsion, "LOGIN") == 0)
@@ -445,23 +459,53 @@ int EjecutarComando(char Comando[])
         }
         else if(strcmp(Funsion, "MKGRP") == 0)
         {
+            strcpy(OperacionActual->contenido, Comando);
             EjecutarMKGRP(pName);
         }
         else if(strcmp(Funsion, "MKUSR") == 0)
         {
+            strcpy(OperacionActual->contenido, Comando);
             EjecutarMKUSR(pUSR, pPWD, pGRP);
         }
         else if(strcmp(Funsion, "MKFILE") == 0)
         {
+            strcpy(OperacionActual->contenido, Comando);
             EjecutarMKFILE(pPath, pP, pSize, pCont);
         }
         else if(strcmp(Funsion, "MKDIR") == 0)
         {
+            strcpy(OperacionActual->contenido, Comando);
             EjecutarMKDIR(pPath, pP);
         }
         else if(strcmp(Funsion, "CAT") == 0)
         {
-            EJecutarCAT(pfile);
+            EJecutarCAT(pfile, 0, "");
+        }
+        else if(strcmp(Funsion, "REM") == 0)
+        {
+            EjecutarREM(pPath);
+        }
+        else if(strcmp(Funsion, "LOSS") == 0)
+        {
+            EjecutarLOSS(pId);
+        }
+        else if(strcmp(Funsion, "RECOVERY") == 0)
+        {
+            EjecutarRECOVERY(pId);
+        }
+        else if(strcmp(Funsion, "LOGOUT") == 0)
+        {
+            if(UsuarioActual->Estado != '0')
+            {
+                UsuarioActual->Estado = '0';
+                printf("Se cerro sesion del usuario \"%s\"\n\n",UsuarioActual->Nombre);
+                return;
+            }
+            else if(UsuarioActual->Estado == '0')
+            {
+                printf("No existe ninguna sesion activa en este momento\n\n");
+                return;
+            }
         }
         else if(strcmp(Funsion,"SALIR") == 0)
         {
@@ -469,6 +513,8 @@ int EjecutarComando(char Comando[])
             return 1;
         }
     }
+
+
 
     return 0;
 }
@@ -496,7 +542,7 @@ void EjecutarArchivo(char* ruta)
 
         for(int j = 0 ; j < i ; j++)
         {
-            EjecutarComando(comandos[j]);
+            EjecutarComando(comandos[j], 0);
         }
 
     }
@@ -505,7 +551,6 @@ void EjecutarArchivo(char* ruta)
         printf("No se pudo abrir el archivo, es posible que no exista\n");
         perror(ruta);
     }
-
 }
 
 void Split(char Linea[], char *Destino1[10])

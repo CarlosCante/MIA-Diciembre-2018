@@ -65,13 +65,13 @@ struct Inodo
 
 struct Journaling
 {
-    char Tipo_Operacion[150];
+    char Tipo_Operacion;
     char Tipo_Elemento;
-    char nombre[12];
-    char contenido[64];
+    char nombre[150];
+    char contenido[150];
     char fecha[17];
     char propietario[10];
-    int permisos[3];
+    int permisos;
 };
 
 struct SuperBloque
