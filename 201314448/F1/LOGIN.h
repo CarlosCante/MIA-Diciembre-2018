@@ -5,8 +5,10 @@
 #include <string.h>
 #include <ctype.h>
 #include "Estructuras.h"
+#include "MKDISK.h"
 
 void EjecutarLogin(char Usuario[], char Pass[], char pID[]);
-void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass[], char Path[], char ajuste);
+int VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass[], char Path[], char ajuste);
+int ObtenerIDGrupo(char name[]);
 
 #endif // LOGIN_H_INCLUDED

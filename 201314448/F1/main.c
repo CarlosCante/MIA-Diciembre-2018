@@ -25,6 +25,9 @@ int main()
     OperacionActual->permisos = 0;
 
 
+
+
+
     while(1)
     {
         printf("Comando->   ");

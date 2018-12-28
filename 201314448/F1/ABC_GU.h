@@ -1,6 +1,7 @@
 #ifndef ABC_GU_H_INCLUDED
 #define ABC_GU_H_INCLUDED
 #include "Estructuras.h"
+#include "MKDISK.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

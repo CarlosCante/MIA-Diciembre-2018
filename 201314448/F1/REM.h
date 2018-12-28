@@ -10,7 +10,10 @@
 #include <ctype.h>
 #include <math.h>
 
-void EjecutarREM(char pPath[]);
+void EjecutarREM(char Path[]);
+void EliminarInodoYBloques(FILE *DISCO, SuperBloque *SB, int AP_Inodo);
+void EliminarRefernciaPadre(FILE *DISCO, SuperBloque *SB, int Padre, int Hijo);
+
 
 
 #endif // REM_H_INCLUDED

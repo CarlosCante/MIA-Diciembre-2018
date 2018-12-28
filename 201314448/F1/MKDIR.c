@@ -48,7 +48,17 @@ void EjecutarMKDIR(char Path[], char P)
             Hijo = ExisteHijo(DISCO, SB, Padre, ListadoCarpetas[i].Nombre);
             if(Hijo == -1)/**La carpeta no existe entonces se crea**/
             {
-                Hijo = CrearCarpeta(DISCO, SB, Padre, ListadoCarpetas[i].Nombre);
+                if(VerificarPermisos(DISCO, SB, Padre, 'E') == 1)
+                {
+                    Hijo = CrearCarpeta(DISCO, SB, Padre, ListadoCarpetas[i].Nombre);
+                }
+                else
+                {
+                    printf("EL usuario no tiene permiso de escritura en la carpeta \"%s\".\n\n", ListadoCarpetas[i - 1].Nombre);
+                    free(SB);
+                    fclose(DISCO);
+                    return;
+                }
             }
         }
 
@@ -73,19 +83,29 @@ void EjecutarMKDIR(char Path[], char P)
             {
                 if(i + 1 == No_Carpetas)
                 {
-                    Hijo = CrearCarpeta(DISCO, SB, Padre, ListadoCarpetas[i].Nombre);
+                    if(VerificarPermisos(DISCO, SB, Padre, 'E') == 1)
+                    {
+                        Hijo = CrearCarpeta(DISCO, SB, Padre, ListadoCarpetas[i].Nombre);
 
-                    OperacionActual->Tipo_Operacion = '3';
-                    OperacionActual->Tipo_Elemento = '0';
-                    strcpy(OperacionActual->nombre, PathAux);
-                    strcpy(OperacionActual->fecha, FechaYHoraActual());
-                    strcpy(OperacionActual->propietario, UsuarioActual->Nombre);
-                    OperacionActual->permisos = 664;
+                        OperacionActual->Tipo_Operacion = '3';
+                        OperacionActual->Tipo_Elemento = '0';
+                        strcpy(OperacionActual->nombre, PathAux);
+                        strcpy(OperacionActual->fecha, FechaYHoraActual());
+                        strcpy(OperacionActual->propietario, UsuarioActual->Nombre);
+                        OperacionActual->permisos = 664;
 
-                    NuevoOperacionJournaling(DISCO, UsuarioActual->InicioParticion);
+                        NuevoOperacionJournaling(DISCO, UsuarioActual->InicioParticion);
 
-                    printf("Se creo correctamente la ruta \"%s\".\n",PathAux);
-                    break;
+                        printf("Se creo correctamente la ruta \"%s\".\n",PathAux);
+                        break;
+                    }
+                    else
+                    {
+                        printf("EL usuario no tiene permiso de escritura en la carpeta \"%s\".\n\n", ListadoCarpetas[i - 1].Nombre);
+                        free(SB);
+                        fclose(DISCO);
+                        return;
+                    }
                 }
                 else
                 {
@@ -275,7 +295,7 @@ int CrearCarpeta(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[])
      /**Creamos el inodo de la carpeta y llenamos sus atributos***************************************************/
 
     InodoHijo->ID_Usuario = UsuarioActual->ID;
-    InodoHijo->ID_Grupo = UsuarioActual->ID;
+    InodoHijo->ID_Grupo = UsuarioActual->ID_Grupo;
     InodoHijo->Tamanio = 0;
 
     strcpy(InodoHijo->fecha_creacion, FechaYHoraActual());
@@ -507,4 +527,91 @@ int BuscarPosicionBloques(FILE *DISCO, SuperBloque *SB, int Cantidad)
     return Inicio;
 }
 
+int VerificarPermisos(FILE *DISCO, SuperBloque *SB, int AP_Inodo, char Operacion)
+{
 
+    extern UsuarioLogeado *UsuarioActual;
+
+    int Respuesta = 0;
+
+    struct Inodo *InodoPadre = (struct Inodo*)malloc(sizeof(struct Inodo));
+    memset(InodoPadre, 0, sizeof(Inodo));
+
+    fseek(DISCO, SB->inicio_Inodos + AP_Inodo*sizeof(Inodo), SEEK_SET);
+    fread(InodoPadre, sizeof(Inodo), 1, DISCO);
+
+	/**Separa Permisos del inodo**/
+	int millaresI = InodoPadre->Permisos/1000;
+	int Inodo_Perm_Usuario = (InodoPadre->Permisos-(millaresI*1000))/100;
+	int Inodo_Perm_Grupo = (InodoPadre->Permisos- (millaresI*1000 + Inodo_Perm_Usuario*100))/10;
+	int Inodo_Perm_Otros = InodoPadre->Permisos-(millaresI*1000 + Inodo_Perm_Usuario*100 + Inodo_Perm_Grupo*10 );
+
+
+	if(UsuarioActual->ID == 1)
+    {
+        Respuesta = 1;
+    }
+    else
+    {
+        if(Operacion == 'L')
+        {
+            if(UsuarioActual->ID == InodoPadre->ID_Usuario && (Inodo_Perm_Usuario == 4 || Inodo_Perm_Usuario == 5 || Inodo_Perm_Usuario == 6 || Inodo_Perm_Usuario == 7))
+            {
+                Respuesta = 1;
+            }
+            else if(UsuarioActual->ID_Grupo == InodoPadre->ID_Grupo && (Inodo_Perm_Grupo == 4 || Inodo_Perm_Grupo == 5 || Inodo_Perm_Grupo == 6 || Inodo_Perm_Grupo == 7))
+            {
+                Respuesta = 1;
+            }
+            else if(Inodo_Perm_Otros == 4 || Inodo_Perm_Otros == 5 || Inodo_Perm_Otros == 6 || Inodo_Perm_Otros == 7)
+            {
+                Respuesta = 1;
+            }
+            else
+            {
+                Respuesta = 0;
+            }
+        }
+        else if(Operacion == 'E')
+        {
+            if(UsuarioActual->ID == InodoPadre->ID_Usuario && (Inodo_Perm_Usuario == 2 || Inodo_Perm_Usuario == 3 || Inodo_Perm_Usuario == 6 || Inodo_Perm_Usuario == 7))
+            {
+                Respuesta = 1;
+            }
+            else if(UsuarioActual->ID_Grupo == InodoPadre->ID_Grupo && (Inodo_Perm_Grupo == 2 || Inodo_Perm_Grupo == 3 || Inodo_Perm_Grupo == 6 || Inodo_Perm_Grupo == 7))
+            {
+                Respuesta = 1;
+            }
+            else if(Inodo_Perm_Otros == 2 || Inodo_Perm_Otros == 3 || Inodo_Perm_Otros == 6 || Inodo_Perm_Otros == 7)
+            {
+                Respuesta = 1;
+            }
+            else
+            {
+                Respuesta = 0;
+            }
+        }
+        else if(Operacion == 'J')
+        {
+            if(UsuarioActual->ID == InodoPadre->ID_Usuario && (Inodo_Perm_Usuario == 1 || Inodo_Perm_Usuario == 3 || Inodo_Perm_Usuario == 5 || Inodo_Perm_Usuario == 7))
+            {
+                Respuesta = 1;
+            }
+            else if(UsuarioActual->ID_Grupo == InodoPadre->ID_Grupo && (Inodo_Perm_Grupo == 1 || Inodo_Perm_Grupo == 3 || Inodo_Perm_Grupo == 5 || Inodo_Perm_Grupo == 7))
+            {
+                Respuesta = 1;
+            }
+            else if(Inodo_Perm_Otros == 1 || Inodo_Perm_Otros == 3 || Inodo_Perm_Otros == 5 || Inodo_Perm_Otros == 7)
+            {
+                Respuesta = 1;
+            }
+            else
+            {
+                Respuesta = 0;
+            }
+        }
+    }
+
+    free(InodoPadre);
+    return Respuesta;
+}

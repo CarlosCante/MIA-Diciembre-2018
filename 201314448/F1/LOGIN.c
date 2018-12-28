@@ -34,7 +34,11 @@ void EjecutarLogin(char Usuario[], char Pass[], char pID[])
 
         if(DISCO != NULL)
         {
-            VerificarUsuario(DISCO, aux->inicio, Usuario, Pass, PathDisco, aux->ajuste);
+            if(VerificarUsuario(DISCO, aux->inicio, Usuario, Pass, PathDisco, aux->ajuste) != 0)
+            {
+                UsuarioActual->ID_Grupo = ObtenerIDGrupo(UsuarioActual->Grupo);
+                printf("ID Grupo: %i\n\n", UsuarioActual->ID_Grupo);
+            }
             fclose(DISCO);
         }
         else
@@ -48,7 +52,7 @@ void EjecutarLogin(char Usuario[], char Pass[], char pID[])
     }
 }
 
-void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass[], char Path[], char ajuste)
+int VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass[], char Path[], char ajuste)
 {
     extern UsuarioLogeado *UsuarioActual;
     char Contenido[280320] = "\0";
@@ -179,4 +183,108 @@ void VerificarUsuario(FILE *DISCO, int InicioParticion,char Usuario[], char Pass
     free(BloqueTMP);
     free(InodoTMP);
     free(SB);
+
+    return encontrado;
+}
+
+
+int ObtenerIDGrupo(char name[])
+{
+
+    extern UsuarioLogeado *UsuarioActual;
+    char Contenido[280320] = "\0";
+
+    FILE *DISCO;
+    DISCO = fopen(UsuarioActual->PathDisco, "r+b");
+
+    struct SuperBloque *SB = (struct SuperBloque*)malloc(sizeof(struct SuperBloque));
+    fseek(DISCO, UsuarioActual->InicioParticion, SEEK_SET);
+    fread(SB, sizeof(SuperBloque), 1, DISCO);
+
+    struct Inodo *InodoTMP = (struct Inodo*)malloc(sizeof(struct Inodo));
+    memset(InodoTMP, 0, sizeof(Inodo));
+
+    struct BloqueArchivo *BloqueTMP = (struct BloqueArchivo*)malloc(sizeof(struct BloqueArchivo));
+    memset(BloqueTMP, 0, sizeof(BloqueArchivo));
+
+    fseek(DISCO, SB->inicio_Inodos + sizeof(Inodo), SEEK_SET);
+    fread(InodoTMP, sizeof(Inodo), 1, DISCO);
+
+
+
+    for(int i = 0 ; i < 12 ; i++)
+    {
+        if(InodoTMP->ap_Bloques[i] != -1)
+        {
+            fseek(DISCO, SB->inicio_Bloques + InodoTMP->ap_Bloques[i]*sizeof(BloqueArchivo), SEEK_SET);
+            fread(BloqueTMP, sizeof(BloqueArchivo), 1, DISCO);
+
+            strcat(Contenido, BloqueTMP->Contenido);
+        }
+    }
+
+    /**Leemos cada linea del archivo users.txt**/
+
+    char *Elemento = strtok(Contenido, "\n");
+    char Tipo;
+    char Grupo[10] = "\0";
+    typedef struct Linea
+    {
+        char Conten[100];
+    }Linea;
+
+    Linea Lineas[100];
+    int j = 0;
+
+    while(Elemento != NULL)
+    {
+        strcpy(Lineas[j].Conten,Elemento);
+        Elemento = strtok(NULL, "\n");
+        j++;
+    }
+
+    int resultado = 0;
+
+    for(int i = 0 ; i < j ;i++)
+    {
+        Elemento = strtok(Lineas[i].Conten,",");
+        while(Elemento != NULL)
+        {
+            resultado = atoi(Elemento);
+            Elemento = strtok(NULL,",");
+            Tipo = Elemento[0];
+            if(Tipo == 'G')
+            {
+                Elemento = strtok(NULL,",");
+                strcpy(Grupo,Elemento);
+                if(strcmp(Grupo, name) == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    resultado = 0;
+                    break;
+                }
+            }
+            else
+            {
+                resultado = 0;
+                break;
+            }
+        }
+        if(resultado != 0)
+        {
+            break;
+        }
+    }
+
+
+    free(BloqueTMP);
+    free(InodoTMP);
+    free(SB);
+
+    fclose(DISCO);
+
+    return resultado;
 }

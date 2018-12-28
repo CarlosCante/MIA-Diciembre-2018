@@ -50,7 +50,17 @@ void EjecutarMKFILE(char Path[], char P, char pSize[], char Cont[])
             Hijo = ExisteHijo(DISCO, SB, Padre, ListadoCarpetas[i].Nombre);
             if(Hijo == -1)/**La carpeta no existe entonces se crea**/
             {
-                Hijo = CrearCarpeta(DISCO, SB, Padre, ListadoCarpetas[i].Nombre);
+                if(VerificarPermisos(DISCO, SB, Padre, 'E') == 1)
+                {
+                    Hijo = CrearCarpeta(DISCO, SB, Padre, ListadoCarpetas[i].Nombre);
+                }
+                else
+                {
+                    printf("EL usuario no tiene permiso de escritura en la carpeta \"%s\".\n\n", ListadoCarpetas[i - 1].Nombre);
+                    free(SB);
+                    fclose(DISCO);
+                    return;
+                }
             }
         }
     }
@@ -74,18 +84,28 @@ void EjecutarMKFILE(char Path[], char P, char pSize[], char Cont[])
     {
         Padre = Hijo;
 
-        CrearArchivo(DISCO, SB, Padre, ListadoCarpetas[No_Carpetas - 1].Nombre, pSize, Cont);
+        if(VerificarPermisos(DISCO, SB, Padre, 'E') == 1)
+        {
+             CrearArchivo(DISCO, SB, Padre, ListadoCarpetas[No_Carpetas - 1].Nombre, pSize, Cont);
 
-        OperacionActual->Tipo_Operacion = '1';
-        OperacionActual->Tipo_Elemento = '1';
-        strcpy(OperacionActual->nombre, PathAux);
-        strcpy(OperacionActual->fecha, FechaYHoraActual());
-        strcpy(OperacionActual->propietario, UsuarioActual->Nombre);
-        OperacionActual->permisos = 664;
+            OperacionActual->Tipo_Operacion = '1';
+            OperacionActual->Tipo_Elemento = '1';
+            strcpy(OperacionActual->nombre, PathAux);
+            strcpy(OperacionActual->fecha, FechaYHoraActual());
+            strcpy(OperacionActual->propietario, UsuarioActual->Nombre);
+            OperacionActual->permisos = 664;
 
-        NuevoOperacionJournaling(DISCO, UsuarioActual->InicioParticion);
+            NuevoOperacionJournaling(DISCO, UsuarioActual->InicioParticion);
 
-        printf("Se creo el archivo \"%s\"\n\n",PathAux);
+            printf("Se creo el archivo \"%s\"\n\n",PathAux);
+        }
+        else
+        {
+            printf("EL usuario no tiene permiso de escritura en la carpeta \"%s\".\n\n", ListadoCarpetas[No_Carpetas - 2].Nombre);
+            free(SB);
+            fclose(DISCO);
+            return;
+        }
     }
     else
     {
@@ -265,7 +285,7 @@ void CrearArchivo(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[], char S
      /**Creamos el inodo de la carpeta y llenamos sus atributos***************************************************/
 
     InodoHijo->ID_Usuario = UsuarioActual->ID;
-    InodoHijo->ID_Grupo = UsuarioActual->ID;
+    InodoHijo->ID_Grupo = UsuarioActual->ID_Grupo;
     InodoHijo->Tamanio = TamanioArchivo;
 
     strcpy(InodoHijo->fecha_creacion, FechaYHoraActual());

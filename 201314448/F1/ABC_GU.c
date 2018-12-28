@@ -14,7 +14,7 @@ void EjecutarMKGRP(char name[])
             {
                 CrearGrupo(name);
 
-                 /**Guardamos la operacion en el journaling de la particion**/
+                /**Guardamos la operacion en el journaling de la particion**/
                 FILE *DISCO;
                 DISCO = fopen(UsuarioActual->PathDisco,"r+b");
 
@@ -241,12 +241,14 @@ void CrearUsusario(char Usuario[], char Pass[], char GrupoN[])
         }
         else
         {
-            InodoTMP->ap_Bloques[i] = SB->first_free_Bloque;
+            int a  = BuscarPosicionBloques(DISCO, SB, 1);
+
+            InodoTMP->ap_Bloques[i] = a;
 
             fseek(DISCO, SB->inicio_Bloques + InodoTMP->ap_Bloques[i]*sizeof(BloqueArchivo), SEEK_SET);
             fwrite(&Bloques[i], sizeof(BloqueArchivo), 1, DISCO);
 
-            fseek(DISCO, SB->inicio_BM_Bloques + SB->first_free_Bloque, SEEK_SET);
+            fseek(DISCO, SB->inicio_BM_Bloques + a, SEEK_SET);
             fwrite("1", sizeof(char), 1, DISCO);
 
             SB->first_free_Bloque = ObtenerPrimerBloqueLibre(DISCO, SB);
@@ -278,7 +280,7 @@ void CrearUsusario(char Usuario[], char Pass[], char GrupoN[])
 
 int VerificarSiUsuarioExiste(char Usuario[])
 {
-     int resultado = 0;
+    int resultado = 0;
 
 
     extern UsuarioLogeado *UsuarioActual;
@@ -514,12 +516,14 @@ void CrearGrupo(char name[])
         }
         else
         {
-            InodoTMP->ap_Bloques[i] = SB->first_free_Bloque;
+            int a = BuscarPosicionBloques(DISCO, SB, 1);
+
+            InodoTMP->ap_Bloques[i] = a;
 
             fseek(DISCO, SB->inicio_Bloques + InodoTMP->ap_Bloques[i]*sizeof(BloqueArchivo), SEEK_SET);
             fwrite(&Bloques[i], sizeof(BloqueArchivo), 1, DISCO);
 
-            fseek(DISCO, SB->inicio_BM_Bloques + SB->first_free_Bloque, SEEK_SET);
+            fseek(DISCO, SB->inicio_BM_Bloques + a, SEEK_SET);
             fwrite("1", sizeof(char), 1, DISCO);
 
             SB->first_free_Bloque = ObtenerPrimerBloqueLibre(DISCO, SB);

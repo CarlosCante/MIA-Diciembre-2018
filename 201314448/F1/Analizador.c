@@ -45,6 +45,7 @@ int EjecutarComando(char Comando[], int tipo)
         char pCont[100] = "\0";
         char pfile[100] = "\0";
         char pRuta[100] = "\0";
+        char pDest[100] = "\0";
 
 
 
@@ -300,6 +301,28 @@ int EjecutarComando(char Comando[], int tipo)
                             }
                         }
                     }
+                    else if(strcmp(ParametroAux,"DEST") == 0)
+                    {
+                        if(Comando[i] == '"')
+                        {
+                            i++;
+                            while(Comando[i] != '"')
+                            {
+                                pDest[j] = Comando[i];
+                                i++;
+                                j++;
+                            }
+                        }
+                        else
+                        {
+                            while(Comando[i] != ' ' && Comando[i] != '\n' && Comando[i] != '\r')
+                            {
+                                pDest[j] = Comando[i];
+                                i++;
+                                j++;
+                            }
+                        }
+                    }
                     else if(strcmp(ParametroAux,"FILE") == 0)
                     {
                         if(Comando[i] == '"')
@@ -483,7 +506,13 @@ int EjecutarComando(char Comando[], int tipo)
         }
         else if(strcmp(Funsion, "REM") == 0)
         {
+            strcpy(OperacionActual->contenido, Comando);
             EjecutarREM(pPath);
+        }
+        else if(strcmp(Funsion, "MV") == 0)
+        {
+            strcpy(OperacionActual->contenido, Comando);
+            EjecutarMV(pPath, pDest);
         }
         else if(strcmp(Funsion, "LOSS") == 0)
         {

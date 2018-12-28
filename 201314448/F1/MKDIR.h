@@ -15,5 +15,7 @@ int CrearCarpeta(FILE *DISCO, SuperBloque *SB, int Padre, char Nombre[]);
 int BuscarPosicionInodo(FILE *DISCO, SuperBloque *SB, int Cantidad);
 int BuscarPosicionBloques(FILE *DISCO, SuperBloque *SB, int Cantidad);
 
+int VerificarPermisos(FILE *DISCO, SuperBloque *SB, int AP_Inodo, char Operacion);
+
 
 #endif // MKDIR_H_INCLUDED

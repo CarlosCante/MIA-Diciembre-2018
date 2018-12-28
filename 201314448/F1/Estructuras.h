@@ -22,10 +22,12 @@ struct UsuarioLogeado
     char Nombre[10];
     char Pass[10];
     int ID;
+    int ID_Grupo;
     char Grupo[10];
     char PathDisco[500];
     int InicioParticion;
     char ajuste;
+    char NombreMovido[12];
 };
 
 struct BloqueApuntadores
@@ -54,9 +56,9 @@ struct Inodo
     int ID_Usuario;
     int ID_Grupo;
     int Tamanio;
-    char fecha_lectura[17];
-    char fecha_creacion[17];
-    char fecha_modificacion[17];
+    char fecha_lectura[20];
+    char fecha_creacion[20];
+    char fecha_modificacion[20];
     int ap_Bloques[15];
     char tipo;
     int Permisos;
